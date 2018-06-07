@@ -1,0 +1,79 @@
+formlist = list('form101')
+for f in formlist:
+    #temp = pd.read_sas(os.path.join(path,f + '.sas7bdat'))
+    #temp.columns = temp.columns.str.replace('z|F101', '')
+    #temp = temp.filter(regex='Q|DataCollected')
+    #temp = temp.select_dtypes(include=['float64'])
+    temp = form101 ## added temp
+    print(temp + ' printing temp')
+    colnames = list(temp)
+    FormNb = f
+    print(f + ' printing f')
+    FormNb = FormNb.replace('form', '')
+    print(FormNb + ' printed after form removed')
+    FormNb = pd.to_numeric(FormNb,downcast='float') 
+    # difference b/n float32 and float64?
+    # np.ndarray.astype
+    
+    for c in colnames:
+        temp[c] = CodetoValue(FormNb, temp[c],c).shape
+        #FormSeries = CodetoValue(101.0, test101['Q03'],'Q03').shape
+        #FormSeries = CodetoValue(101.0, f[c], c).shape   
+    
+    print(temp)
+    
+    
+    
+
+
+form101
+
+figure out codes for each question (3-12)
+
+data dictionary
+zFormID >> ie. form101
+zFieldNb >> column names in form
+zFieldNm >> 
+
+codelist - use it to decode values
+GroupID >> form???
+ItemNb >> answer code???
+ZItemNm >> question text
+- try subset by GroupID 101.0 and match questions/values
+
+add column(s): form
+    101 or inclusion and exclusion criteria
+
+Change column names
+    zSubjectCode     subject id
+    SiteID           site id
+    zVisitNm         visit number
+    F101Q11          enrollment status
+    F101Q12          general comments
+    F101zConsentDate consent date
+    F101zAge         age
+    F101Q03          ??? binary
+    F101Q04          ??? binary
+    F101Q05          adverse event
+    F101Q06          ??? death date
+    F101Q07          
+    F101Q08          
+    F101Q09          
+    F101Q10          
+list: 
+    'subject id',
+    'site id',
+    'visit number',
+    'enrollment status',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    
+transformations
